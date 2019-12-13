@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreferenceCompat
+        android:key="notification"
+        android:title="Enable Push Notifications"
+
+        />
+    <Preference
+        android:key="about"
+        android:title="About Us">
+        <intent
+            android:action="com.recip.settings.SETTING_START_ABOUT"
+            android:targetClass="com.recip.ui.activities.about.AboutUsActivity"
+            android:targetPackage="com.recip" />
+    </Preference>
+    <Preference
+        android:key="privacy"
+        android:title="Privacy Policy">
+        <intent
+            android:action="com.recip.settings.SETTING_START_PRIVACY_POLICY"
+            android:targetClass="com.recip.ui.activities.PrivacyPolicyActivity"
+            android:targetPackage="com.recip" />
+    </Preference>
+    <Preference
+        android:key="more"
+        android:title="More Apps" />
+    <Preference
+        android:key="share"
+        android:title="Share App" />
+    <Preference
+        android:key="rate"
+        android:title="Rate App" />
+
+</PreferenceScreen>
