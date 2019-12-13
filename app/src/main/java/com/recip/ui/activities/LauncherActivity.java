@@ -3,7 +3,9 @@ package com.recip.ui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.WindowManager;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -21,7 +23,16 @@ public class LauncherActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         YoYo.with(Techniques.FadeInUp)
-                .duration(2000)
+                .duration(1000)
                 .playOn(findViewById(R.id.launcherIcon));
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(LauncherActivity.this,MainActivity.class));
+                finish();
+            }
+        },1500);
     }
 }
