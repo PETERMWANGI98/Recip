@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="@string/menu_home"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/white"
         android:textStyle="bold"
@@ -40,14 +40,13 @@
         app:layout_constraintTop_toTopOf="@+id/barsIcon"
         app:layout_constraintVertical_bias="1.0" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/iVProfile"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/chocolate"
-        app:civ_border_color="@android:color/white"
+        android:src="@drawable/ic_more_vert_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/activityLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +62,8 @@
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activityLabel">
+        app:layout_constraintTop_toBottomOf="@+id/activityLabel"
+        android:focusable="true">
 
         <ImageView
             android:id="@+id/searchView"
@@ -138,7 +138,6 @@
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="#c0c0c0"
-        android:elevation="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVCategoriesLabel" />
 
