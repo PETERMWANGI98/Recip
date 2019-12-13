@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,10 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.sentry.Sentry;
+import io.sentry.event.Breadcrumb;
+import io.sentry.event.BreadcrumbBuilder;
+import io.sentry.event.UserBuilder;
 import timber.log.Timber;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
@@ -77,6 +82,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signUpUser(signUpEmail, signUpPassword);
     }
 
+
+
     private void signUpUser(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -89,6 +96,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         } else {
                             Timber.w("createUserWithEmail:failure %s", Objects.requireNonNull(task.getException()).getMessage());
                             Toast.makeText(SignUpActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                            Sentry.capture(task.getException());
                         }
                     }
                 });
