@@ -65,11 +65,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnLogin:
                 fetchData();
+                break;
             case R.id.buttonSkip:
                 Intent skipIntent = new Intent(LoginActivity.this, NameActivity.class);
                 startActivity(skipIntent);
                 break;
-
         }
     }
 
@@ -90,8 +90,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             tVEmailLogin.setError("Invalid Email ...");
             return false;
         }
+        else {
 
-        return true;
+            return true;
+        }
     }
 
     private void loginUser(String email, String password) {

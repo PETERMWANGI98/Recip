@@ -60,11 +60,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             Intent intent = getIntent();
             byPassName = intent.getStringExtra("name");
-            Toast.makeText(this, byPassName, Toast.LENGTH_SHORT).show();
             userNameTextView = (TextView) headerView.findViewById(R.id.userNameTextView);
-            userNameTextView.setText(byPassName
-                    .substring(0, 1).toUpperCase()
-                    .concat(byPassName.substring(1).toLowerCase()));
+
+            if (byPassName != null) {
+                userNameTextView.setText(byPassName
+                        .substring(0, 1).toUpperCase()
+                        .concat(byPassName.substring(1).toLowerCase()));
+            }
+
 
         } else {
             menuItem.setTitle("Logout");
@@ -86,10 +89,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        Bundle args=new Bundle();
-        args.putString("name",byPassName);
+        Bundle args = new Bundle();
+        args.putString("name", byPassName);
 
-        navController.setGraph(R.navigation.mobile_navigation,args);
+        navController.setGraph(R.navigation.mobile_navigation, args);
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -129,12 +132,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = menuItem.getItemId();
         switch (id) {
             case R.id.nav_home:
-                Bundle bundle=new Bundle();
-                if(userNameTextView !=null) {
+                Bundle bundle = new Bundle();
+                if (userNameTextView != null) {
                     Timber.e("onNavigationItemSelected: ".concat(userNameTextView.getText().toString()));
                     bundle.putString("name", userNameTextView.getText().toString());
                 }
-                navController.navigate(R.id.nav_home,bundle);
+                navController.navigate(R.id.nav_home, bundle);
                 break;
             case R.id.nav_favourites:
                 navController.navigate(R.id.nav_favourites);

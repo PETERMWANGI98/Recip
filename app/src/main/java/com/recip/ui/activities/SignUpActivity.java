@@ -97,7 +97,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             etSignUpPassword.setError("Password too short...");
             return false;
         }
-        return true;
+        else {
+            return true;
+        }
     }
 
 

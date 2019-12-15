@@ -11,6 +11,20 @@ public class Menu {
         this.title = title;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Menu menu = (Menu) o;
+        return Objects.equals(imageUrl, menu.imageUrl) &&
+                Objects.equals(title, menu.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(imageUrl, title);
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -27,17 +41,4 @@ public class Menu {
         this.title = title;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Menu menu = (Menu) o;
-        return Objects.equals(imageUrl, menu.imageUrl) &&
-                Objects.equals(title, menu.title);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(imageUrl, title);
-    }
 }
