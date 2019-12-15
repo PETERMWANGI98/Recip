@@ -1,12 +1,10 @@
 package com.recip.ui.fragments.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,15 +19,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.recip.R;
-import com.recip.models.Recent;
-import com.recip.ui.activities.MainActivity;
-import com.recip.ui.activities.about.AboutUsViewModel;
-import com.recip.ui.adapters.AboutRecyclerViewAdapter;
-import com.recip.ui.adapters.RecentRecyclerViewAdapter;
-import com.recip.ui.fragments.LoginActivity;
-import com.recip.ui.activities.ProfileActivity;
+import com.recip.models.Menu;
+import com.recip.ui.adapters.MenuAdapter;
 
 import java.util.ArrayList;
 
@@ -54,7 +46,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
     TextView tVSearchhint;
 
     private HomeFragmentViewModel homeFragmentViewModel;
-    private RecentRecyclerViewAdapter recentRecyclerViewAdapter;
+    private MenuAdapter menuAdapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,13 +63,13 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
         return root;
     }
 
-    private Observer<? super ArrayList<Recent>> recentListUpdateObserver =
-            new Observer<ArrayList<Recent>>() {
+    private Observer<? super ArrayList<Menu>> recentListUpdateObserver =
+            new Observer<ArrayList<Menu>>() {
                 @Override
-                public void onChanged(ArrayList<Recent> recents) {
-                    recentRecyclerViewAdapter = new RecentRecyclerViewAdapter(getContext(), recents);
+                public void onChanged(ArrayList<Menu> menus) {
+                    menuAdapter = new MenuAdapter(getContext(), menus);
                     rvRecent.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-                    rvRecent.setAdapter(recentRecyclerViewAdapter);
+                    rvRecent.setAdapter(menuAdapter);
 
                 }
             };

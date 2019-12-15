@@ -57,9 +57,9 @@
         <activity
             android:name=".ui.activities.ForgotPasswordActivity"
             android:label="Forgot Password ?"
-            android:parentActivityName=".ui.fragments.LoginActivity" />
+            android:parentActivityName=".ui.activities.LoginActivity" />
         <activity
-            android:name=".ui.fragments.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.activities.SignUpActivity"

@@ -1,4 +1,4 @@
-package com.recip.ui.fragments;
+package com.recip.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,9 +17,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.recip.R;
-import com.recip.ui.activities.MainActivity;
-import com.recip.ui.activities.SignUpActivity;
-import com.recip.ui.activities.ForgotPasswordActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

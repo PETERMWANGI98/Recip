@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.recip.R;
-import com.recip.ui.fragments.LoginActivity;
 
 import java.util.Objects;
 

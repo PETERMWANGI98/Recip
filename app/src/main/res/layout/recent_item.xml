@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
     app:cardCornerRadius="8dp"
-    app:cardElevation="6dp"
-       android:layout_margin="8dp"
-    android:orientation="vertical">
+    app:cardElevation="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardView"
@@ -45,24 +45,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iVRecent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    <TextView
-        android:id="@+id/tVRecentDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="BREAKFAST"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:visibility="gone"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tVRecentTitle" />
 
 
 </androidx.cardview.widget.CardView>

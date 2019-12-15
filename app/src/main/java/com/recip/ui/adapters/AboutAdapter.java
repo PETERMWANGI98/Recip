@@ -14,11 +14,11 @@ import com.recip.ui.viewholders.AboutViewHolder;
 
 import java.util.ArrayList;
 
-public class AboutRecyclerViewAdapter extends RecyclerView.Adapter<AboutViewHolder> {
+public class AboutAdapter extends RecyclerView.Adapter<AboutViewHolder> {
     private AboutUsActivity context;
     private ArrayList<About> aboutArrayList;
 
-    public AboutRecyclerViewAdapter(AboutUsActivity context, ArrayList<About> aboutArrayList) {
+    public AboutAdapter(AboutUsActivity context, ArrayList<About> aboutArrayList) {
         this.context = context;
         this.aboutArrayList = aboutArrayList;
     }

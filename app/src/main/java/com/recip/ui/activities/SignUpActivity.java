@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,16 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.recip.R;
-import com.recip.ui.fragments.LoginActivity;
 
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.sentry.Sentry;
-import io.sentry.event.Breadcrumb;
-import io.sentry.event.BreadcrumbBuilder;
-import io.sentry.event.UserBuilder;
 import timber.log.Timber;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {

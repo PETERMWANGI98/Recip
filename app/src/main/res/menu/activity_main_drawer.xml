@@ -9,21 +9,14 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_latest"
-            android:icon="@drawable/ic_folder_special_black_24dp"
-            android:title="@string/menu_latest" />
-        <item
-            android:id="@+id/nav_categories"
-            android:icon="@drawable/ic_folder_black_24dp"
-            android:title="@string/menu_categories" />
-        <item
-            android:id="@+id/nav_views"
-            android:icon="@drawable/ic_search_black_24dp"
-            android:title="@string/menu_views" />
-        <item
             android:id="@+id/nav_favourites"
             android:icon="@drawable/ic_favorite_border_black_24dp"
             android:title="@string/menu_favourites" />
+        <item
+           android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/menu_profile"
+            />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black_24dp"

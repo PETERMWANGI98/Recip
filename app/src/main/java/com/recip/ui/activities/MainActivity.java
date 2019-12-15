@@ -14,7 +14,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.recip.R;
-import com.recip.ui.fragments.LoginActivity;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,7 +24,6 @@ import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
 
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -39,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
         setUpNavigation();
 
         mAuth = FirebaseAuth.getInstance();
@@ -62,8 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_latest, R.id.nav_categories,
-                R.id.nav_views, R.id.nav_favourites, R.id.nav_settings, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_favourites,R.id.nav_profile, R.id.nav_settings, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -109,17 +106,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 navController.navigate(R.id.nav_home);
                 break;
-            case R.id.nav_latest:
-                navController.navigate(R.id.nav_latest);
-                break;
-            case R.id.nav_categories:
-                navController.navigate(R.id.nav_categories);
-                break;
-            case R.id.nav_views:
-                navController.navigate(R.id.nav_views);
-                break;
             case R.id.nav_favourites:
                 navController.navigate(R.id.nav_favourites);
+                break;
+            case R.id.nav_profile:
+                navController.navigate(R.id.nav_profile);
                 break;
             case R.id.nav_settings:
                 navController.navigate(R.id.nav_settings);
