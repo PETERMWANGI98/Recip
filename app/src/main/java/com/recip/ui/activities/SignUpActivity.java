@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PatternMatcher;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -37,8 +40,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.etSignUpPassword)
     EditText etSignUpPassword;
 
-    @BindView(R.id.etSignUpPhone)
-    EditText etSignUpPhone;
 
     @BindView(R.id.btnSignUp)
     Button btnSignUp;
@@ -56,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
     }
 
@@ -77,9 +78,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void fetchData() {
         String signUpEmail = etSignUpEmail.getText().toString().trim();
         String signUpPassword = etSignUpPassword.getText().toString().trim();
-        signUpUser(signUpEmail, signUpPassword);
+        String signUpName = etSignUpName.getText().toString().trim();
+        if (validateInputs(signUpEmail,signUpName,signUpPassword)) {
+            signUpUser(signUpEmail, signUpPassword);
+        }
     }
 
+    private boolean validateInputs(String signUpEmail, String signUpName, String signUpPassword) {
+        if (TextUtils.isEmpty(signUpEmail) || TextUtils.isEmpty(signUpName) || TextUtils.isEmpty(signUpPassword)){
+            Toast.makeText(this, "Inputs cannot be empty ...", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(!Patterns.EMAIL_ADDRESS.matcher(signUpEmail).matches()){
+            etSignUpEmail.setError("Invalid Email ...");
+            return false;
+        }
+        else if(signUpPassword.length()<6){
+            etSignUpPassword.setError("Password too short...");
+            return false;
+        }
+        return true;
+    }
 
 
     private void signUpUser(String email, String password) {
@@ -100,13 +119,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null) {
-//            Intent intent = new Intent(this, MainActivityDummy.class);
-//            startActivity(intent);
-//        }
-    }
+
 }

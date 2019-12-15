@@ -15,15 +15,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MenuViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.iVRecent)
-    public ImageView iVRecent;
-    @BindView(R.id.tVRecentTitle)
-    public TextView tVRecentTitle;
-    public TextView tVRecentDescription;
+    @BindView(R.id.mImageView)
+    public ImageView mImageView;
 
-    public MenuViewHolder(@NonNull final View itemView) {
+    @BindView(R.id.mTitle)
+    public TextView mTitle;
+
+
+    public MenuViewHolder(@NonNull  View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-
     }
 }

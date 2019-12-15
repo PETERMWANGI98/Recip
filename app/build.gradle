@@ -51,17 +51,13 @@ dependencies {
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    implementation 'info.androidhive:fontawesome:0.0.5'
-
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'de.hdodenhof:circleimageview:3.0.1'
 
     implementation 'io.sentry:sentry-android:1.7.27'
     implementation 'org.slf4j:slf4j-nop:1.7.25'
 
-    implementation 'com.daimajia.easing:library:2.0@aar'
-    implementation 'com.daimajia.androidanimations:library:2.3@aar'
 
 }
 apply plugin: 'com.google.gms.google-services'

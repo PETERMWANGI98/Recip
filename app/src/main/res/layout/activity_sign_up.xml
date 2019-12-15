@@ -85,24 +85,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etSignUpEmail" />
 
-        <EditText
-            android:id="@+id/etSignUpPhone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:backgroundTint="@android:color/white"
-            android:ems="10"
-            android:hint="Phone"
-            android:inputType="phone"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etSignUpPassword" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignUp"
@@ -121,13 +103,13 @@
             android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etSignUpPhone" />
+            app:layout_constraintTop_toBottomOf="@+id/etSignUpPassword" />
 
         <TextView
             android:id="@+id/tVLoginLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="28dp"
+            android:layout_marginBottom="32dp"
             android:text="Already have an Account?"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/white"

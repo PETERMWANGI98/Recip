@@ -74,13 +74,12 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
-        android:id="@+id/tVLatestLabel"
+        android:id="@+id/tVUserWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:textSize="22sp"
-        android:text="@string/find_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -96,7 +95,7 @@
         android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tVLatestLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/tVUserWelcome" />
 
     <TextView
         android:id="@+id/tVCategoriesLabel"

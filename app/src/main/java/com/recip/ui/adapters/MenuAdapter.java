@@ -1,6 +1,7 @@
 package com.recip.ui.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,15 +9,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.recip.R;
 import com.recip.models.Menu;
 import com.recip.ui.viewholders.MenuViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
+    private static final String TAG = "MenuAdapter";
     Context context;
     ArrayList<Menu> menuArrayList;
 
@@ -28,7 +29,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(context).inflate(R.layout.recent_item, parent, false);
+        View rootView = LayoutInflater.from(context).inflate(R.layout.top_menu_item, parent, false);
         context = parent.getContext();
         return new MenuViewHolder(rootView);
     }
@@ -36,11 +37,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
         Menu menu = menuArrayList.get(position);
-        Glide.with(context)
+        Picasso.get()
                 .load(menu.getImageUrl())
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(holder.iVRecent);
-        holder.tVRecentTitle.setText(menu.getTitle());
+                .into(holder.mImageView);
+        holder.mTitle.setText(menu.getTitle());
 
     }
 
