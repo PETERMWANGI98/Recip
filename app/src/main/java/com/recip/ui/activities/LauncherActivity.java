@@ -22,9 +22,6 @@ public class LauncherActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        YoYo.with(Techniques.FadeInUp)
-                .duration(1000)
-                .playOn(findViewById(R.id.launcherIcon));
 
 
         new Handler().postDelayed(new Runnable() {

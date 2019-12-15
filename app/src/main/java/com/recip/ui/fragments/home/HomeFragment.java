@@ -49,8 +49,6 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
     @BindView(R.id.barsIcon)
     ImageView barsIcon;
 
-    @BindView(R.id.searchView)
-    ImageView searchView;
 
     @BindView(R.id.tVSearchhint)
     TextView tVSearchhint;
@@ -66,7 +64,6 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
 
         rvRecent.setOnClickListener(this);
         barsIcon.setOnClickListener(this);
-        searchView.setOnClickListener(this);
         tVSearchhint.setOnClickListener(this);
 
         homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
@@ -100,7 +97,6 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
                 DrawerLayout drawerLayout = getActivity().findViewById(R.id.drawer_layout);
                 drawerLayout.openDrawer(Gravity.LEFT);
                 break;
-            case R.id.searchView:
             case R.id.tVSearchhint:
                 getActivity().onSearchRequested();
                 break;
