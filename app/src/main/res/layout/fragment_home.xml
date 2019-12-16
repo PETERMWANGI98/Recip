@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@android:color/white"
+    android:scrollbars="none"
     android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        >
 
     <View
         android:id="@+id/view"
@@ -79,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -92,11 +100,69 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tVUserWelcome" />
 
+    <include
+        android:id="@+id/homeNewsInclude"
+        layout="@layout/home_news_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvRecent" />
+
+    <TextView
+        android:id="@+id/tvRecommendedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recommended Recipes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeNewsInclude" />
+    <TextView
+        android:id="@+id/textViewRecommendedLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Recipes you might like"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/tVSearchhint"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendedTitle" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        layout="@layout/recommended_item"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecommendedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+        <include
+            layout="@layout/recommended_item"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRecommendedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
