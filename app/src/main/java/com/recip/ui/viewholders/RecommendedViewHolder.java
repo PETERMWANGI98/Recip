@@ -14,16 +14,16 @@ import butterknife.ButterKnife;
 
 public class RecommendedViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.recommendedImageView)
-    ImageView recommendedImageView;
+    public ImageView recommendedImageView;
 
     @BindView(R.id.recommendedType)
-    TextView recommendedType;
+    public TextView recommendedType;
 
     @BindView(R.id.recommendedTitle)
-    TextView recommendedTitle;
+    public TextView recommendedTitle;
 
     @BindView(R.id.recommendedDuration)
-    TextView recommendedDuration;
+    public TextView recommendedDuration;
 
     public RecommendedViewHolder(@NonNull View itemView) {
         super(itemView);
