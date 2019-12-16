@@ -20,7 +20,7 @@
         android:background="@android:color/white">
 
         <ImageView
-            android:id="@+id/iVTopProperty"
+            android:id="@+id/recommendedImageView"
             android:layout_width="156dp"
             android:layout_height="96dp"
             android:scaleType="centerCrop"
@@ -35,12 +35,12 @@
             android:layout_height="96dp"
             android:background="#66000000"
             android:fitsSystemWindows="true"
-            app:layout_constraintEnd_toEndOf="@+id/iVTopProperty"
-            app:layout_constraintStart_toStartOf="@+id/iVTopProperty"
+            app:layout_constraintEnd_toEndOf="@+id/recommendedImageView"
+            app:layout_constraintStart_toStartOf="@+id/recommendedImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tVTopPropertyTitle"
+            android:id="@+id/recommendedType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DISHTYPE"
@@ -50,37 +50,37 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/iVTopProperty" />
+            app:layout_constraintTop_toBottomOf="@+id/recommendedImageView" />
 
         <TextView
-            android:id="@+id/tVTopPropertyRegion"
+            android:id="@+id/recommendedTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/baked_cheese_manicotti"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/iVTopProperty"
-            app:layout_constraintStart_toStartOf="@+id/iVTopProperty"
-            app:layout_constraintTop_toBottomOf="@+id/tVTopPropertyTitle" />
+            app:layout_constraintEnd_toEndOf="@+id/recommendedType"
+            app:layout_constraintStart_toStartOf="@+id/recommendedType"
+            app:layout_constraintTop_toBottomOf="@+id/recommendedType" />
 
         <TextView
-            android:id="@+id/tVTopPropertySize"
+            android:id="@+id/recommendedDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="45 mins."
             android:textColor="@android:color/black"
-            app:layout_constraintStart_toEndOf="@+id/iVLocation"
-            app:layout_constraintTop_toBottomOf="@+id/tVTopPropertyRegion" />
+            app:layout_constraintStart_toEndOf="@+id/recommendedDurationIcon"
+            app:layout_constraintTop_toBottomOf="@+id/recommendedTitle" />
 
         <ImageView
-            android:id="@+id/iVLocation"
+            android:id="@+id/recommendedDurationIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:tint="@android:color/darker_gray"
-            app:layout_constraintStart_toStartOf="@+id/tVTopPropertyRegion"
-            app:layout_constraintTop_toBottomOf="@+id/tVTopPropertyRegion"
+            app:layout_constraintStart_toStartOf="@+id/recommendedTitle"
+            app:layout_constraintTop_toBottomOf="@+id/recommendedTitle"
             app:srcCompat="@drawable/ic_access_time_black_24dp" />
 
         <ImageView
