@@ -16,12 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.recip.R;
 import com.recip.models.Menu;
+import com.recip.models.Recipe;
+import com.recip.models.RecipeRandomResponse;
 import com.recip.ui.adapters.MenuAdapter;
+import com.recip.ui.adapters.RecommendedAdapter;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,9 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
     private Unbinder unbinder;
     @BindView(R.id.rvRecent)
     RecyclerView rvRecent;
+
+    @BindView(R.id.recommendedRecyclerView)
+    RecyclerView recommendedRecyclerView;
 
     @BindView(R.id.tvSearch)
     ConstraintLayout constraintLayout;
@@ -50,6 +57,8 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
 
     private HomeFragmentViewModel homeFragmentViewModel;
     private MenuAdapter menuAdapter;
+
+    private RecommendedAdapter recommendedAdapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -72,8 +81,19 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
 
         homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
         homeFragmentViewModel.getListMutableLiveData().observe(this, recentListUpdateObserver);
+        homeFragmentViewModel.getRandomRecipeLiveData().observe(this,randomListUpdateObserver);
         return root;
     }
+
+    private Observer<ArrayList<Recipe>> randomListUpdateObserver=
+         new Observer<ArrayList<Recipe>>() {
+             @Override
+             public void onChanged(ArrayList<Recipe> recipes) {
+                 recommendedAdapter = new RecommendedAdapter(getContext(), recipes);
+                 recommendedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+                 recommendedRecyclerView.setAdapter(recommendedAdapter);
+             }
+         };
 
     private Observer<? super ArrayList<Menu>> recentListUpdateObserver =
             new Observer<ArrayList<Menu>>() {

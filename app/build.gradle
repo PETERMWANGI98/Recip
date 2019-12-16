@@ -17,7 +17,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField 'String','RECIPE_API_KEY','recipeApiKey'
+        it.buildConfigField 'String','RECIPE_API_KEY',recipeApiKey
     }
     buildTypes {
         release {

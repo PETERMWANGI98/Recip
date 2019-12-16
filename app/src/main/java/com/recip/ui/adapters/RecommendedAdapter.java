@@ -6,6 +6,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,9 +22,9 @@ import java.util.ArrayList;
 public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHolder> {
 
     private Context mContext;
-    private ArrayList<RecipeRandomResponse> recipeRandomResponses;
+    private ArrayList<Recipe> recipeRandomResponses;
 
-    public RecommendedAdapter(Context mContext, ArrayList<RecipeRandomResponse> recipeRandomResponses) {
+    public RecommendedAdapter(Context mContext, ArrayList<Recipe> recipeRandomResponses) {
         this.mContext = mContext;
         this.recipeRandomResponses = recipeRandomResponses;
     }
@@ -39,15 +40,19 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
     @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull RecommendedViewHolder holder, int position) {
-        RecipeRandomResponse recipeRandomResponse = recipeRandomResponses.get(position);
-        for (int i = 0; i < recipeRandomResponse.getRecipes().size(); i++) {
-            Recipe recipe = recipeRandomResponse.getRecipes().get(i);
-            Picasso.get()
-                    .load(recipe.getImage())
-                    .into(holder.recommendedImageView);
-            holder.recommendedType.setText(String.format("%d Minutes .",recipe.getCookingMinutes()));
-            holder.recommendedTitle.setText(recipe.getTitle());
+        Recipe recipe = recipeRandomResponses.get(position);
+        Picasso.get()
+                .load(recipe.getImage())
+                .into(holder.recommendedImageView);
+        if (recipe.getDishTypes().size()!=0) {
+            holder.recommendedType.setText(recipe.getDishTypes().get(0).toUpperCase());
         }
+        else {
+            holder.recommendedType.setText("Uncategorized");
+
+        }
+        holder.recommendedDuration.setText(String.format("%d Minutes .", recipe.getCookingMinutes()));
+        holder.recommendedTitle.setText(recipe.getTitle());
     }
 
     @Override

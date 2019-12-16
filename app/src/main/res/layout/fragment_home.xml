@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@android:color/white"
+    android:theme="@style/Theme.MaterialComponents"
     android:scrollbars="none"
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,31 +139,60 @@
         android:text="Recipes you might like"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="@+id/tVSearchhint"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRecommendedTitle" />
 
 
-    <include
-        layout="@layout/recommended_item"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recommendedRecyclerView"
         app:layout_constraintTop_toBottomOf="@+id/textViewRecommendedLabel"
+        android:layout_margin="16dp"
+        android:paddingBottom="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="16dp"
-        android:paddingBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
 
-        <include
-            layout="@layout/recommended_item"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRecommendedLabel"
-            android:layout_width="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecommendations"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginTop="16dp"
-            android:paddingBottom="16dp"
+            android:padding="8dp"
+            android:onClick="onClick"
+            android:elevation="0dp"
+            android:text="Show all recommendations"
+
+            android:textColor="@color/colorPrimary"
+            android:background="@android:color/white"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/colorPrimary"
+            android:textStyle="normal"
+            app:cornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recommendedRecyclerView" />
+
+        <TextView
+            android:id="@+id/tvAfricanTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore African Recipes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="32dp"
+            android:layout_margin="16dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecommendations" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
