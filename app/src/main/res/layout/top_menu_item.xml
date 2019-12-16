@@ -10,8 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardViewMenu"
-        android:layout_width="156dp"
-        android:layout_height="116dp"
+        android:layout_width="176dp"
+        android:layout_height="136dp"
         android:background="@android:color/white"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
         <ImageView
             android:id="@+id/mImageView"
             android:layout_width="match_parent"
-            android:layout_height="76dp"
+            android:layout_height="96dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
             android:src="@drawable/chocolate"

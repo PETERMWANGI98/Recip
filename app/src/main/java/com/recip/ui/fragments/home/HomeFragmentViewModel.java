@@ -22,11 +22,11 @@ public class HomeFragmentViewModel extends ViewModel {
     }
 
     private void populateList() {
-        Menu menuOne = new Menu("https://inspiredentertainment.com/media/Crispy-Chocolate-Peanut-Butter-Balls_16x9_Healthy-Meal-Plans.jpg", "Salad");
-        Menu menuTwo = new Menu("https://aahaaramonline.com/wp-content/uploads/2019/06/lasooni_palak-880x600.jpg", "Healthy");
-        Menu menuThree = new Menu("https://i.ytimg.com/vi/ljfywL0g9fI/maxresdefault.jpg", "Desserts");
-        Menu menuFour = new Menu("https://aahaaramonline.com/wp-content/uploads/2019/06/lasooni_palak-880x600.jpg", "Breakfast");
-        Menu menuFive = new Menu("https://aahaaramonline.com/wp-content/uploads/2019/06/lasooni_palak-880x600.jpg", "Appetizer");
+        Menu menuOne = new Menu("https://ak9.picdn.net/shutterstock/videos/720259/thumb/1.jpg", "Salad");
+        Menu menuTwo = new Menu("https://wallpaperaccess.com/full/138469.jpg", "Dinner");
+        Menu menuThree = new Menu("https://hdwallpaperim.com/wp-content/uploads/2017/08/27/144689-chocolate-cakes-desserts-748x468.jpg", "Desserts");
+        Menu menuFour = new Menu("https://freedesignfile.com/upload/2017/07/sumptuous-breakfast-HD-picture.jpg", "Breakfast");
+        Menu menuFive = new Menu("https://abigailkirsch.com/wp-content/uploads/2015/02/hd-crab-and-grapefuit-glam.jpg", "Appetizer");
 
 
         menuArrayList.add(menuOne);
