@@ -1,15 +1,12 @@
 package com.recip.ui.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.recip.R;
 
 public class LauncherActivity extends AppCompatActivity {

@@ -3,6 +3,7 @@ package com.recip.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -22,15 +23,23 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
-
+    private static final String TAG = "MainActivity";
     private AppBarConfiguration mAppBarConfiguration;
     public DrawerLayout drawer;
     NavController navController;
     NavigationView navigationView;
-    Toolbar toolbar;
+    View headerView;
+    TextView userNameTextView;
+
+    String byPassName;
 
     FirebaseAuth mAuth;
 
@@ -38,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setUpNavigation();
 
         mAuth = FirebaseAuth.getInstance();
@@ -47,6 +57,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (mAuth.getCurrentUser() == null) {
             menuItem.setTitle("Login");
+
+            Intent intent = getIntent();
+            byPassName = intent.getStringExtra("name");
+            userNameTextView = (TextView) headerView.findViewById(R.id.userNameTextView);
+
+            if (byPassName != null) {
+                userNameTextView.setText(byPassName
+                        .substring(0, 1).toUpperCase()
+                        .concat(byPassName.substring(1).toLowerCase()));
+            }
+
 
         } else {
             menuItem.setTitle("Logout");
@@ -58,13 +79,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        headerView = navigationView.getHeaderView(0);
+
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_favourites,R.id.nav_profile, R.id.nav_settings, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_favourites, R.id.nav_profile, R.id.nav_settings, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        Bundle args = new Bundle();
+        args.putString("name", byPassName);
+
+        navController.setGraph(R.navigation.mobile_navigation, args);
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -104,7 +132,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = menuItem.getItemId();
         switch (id) {
             case R.id.nav_home:
-                navController.navigate(R.id.nav_home);
+                Bundle bundle = new Bundle();
+                if (userNameTextView != null) {
+                    Timber.e("onNavigationItemSelected: ".concat(userNameTextView.getText().toString()));
+                    bundle.putString("name", userNameTextView.getText().toString());
+                }
+                navController.navigate(R.id.nav_home, bundle);
                 break;
             case R.id.nav_favourites:
                 navController.navigate(R.id.nav_favourites);

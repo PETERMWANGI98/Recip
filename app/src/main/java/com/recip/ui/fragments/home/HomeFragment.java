@@ -45,6 +45,9 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
     @BindView(R.id.tVSearchhint)
     TextView tVSearchhint;
 
+    @BindView(R.id.tVUserWelcome)
+    TextView tVUserWelcome;
+
     private HomeFragmentViewModel homeFragmentViewModel;
     private MenuAdapter menuAdapter;
 
@@ -53,6 +56,15 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
+
+        if (getArguments().getString("name") != null) {
+            tVUserWelcome.setText(getString(R.string.find_label).concat(getArguments().getString("name").concat("?")));
+
+        } else {
+            tVUserWelcome.setText(getString(R.string.find_label).concat("?"));
+
+        }
+
 
         rvRecent.setOnClickListener(this);
         barsIcon.setOnClickListener(this);
@@ -68,7 +80,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
                 @Override
                 public void onChanged(ArrayList<Menu> menus) {
                     menuAdapter = new MenuAdapter(getContext(), menus);
-                    rvRecent.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                    rvRecent.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                     rvRecent.setAdapter(menuAdapter);
 
                 }
