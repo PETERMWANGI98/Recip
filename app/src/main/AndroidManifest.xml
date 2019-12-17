@@ -71,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.SignUpActivity"
+            android:name=".ui.activities.signup.SignUpActivity"
             android:label="@string/app_name"
             android:theme="@style/NoActionBar">
 
