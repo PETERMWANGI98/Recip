@@ -26,12 +26,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.recip.R;
+import com.recip.models.FirebaseUser;
 import com.recip.ui.activities.LoginActivity;
 import com.recip.ui.activities.signup.SignUpViewModel;
 
@@ -77,7 +81,9 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
 
-    public static final int GALLERY_REQUEST_CODE = 100;
+    private static final int GALLERY_REQUEST_CODE = 100;
+
+    private DatabaseReference usersDatabaseRef;
 
     public SignUpSecond() {
         // Required empty public constructor
@@ -95,8 +101,12 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         rootView = inflater.inflate(R.layout.fragment_sign_up_second, container, false);
+        rootView = inflater.inflate(R.layout.fragment_sign_up_second, container, false);
         unbinder = ButterKnife.bind(this, rootView);
+
+        usersDatabaseRef = FirebaseDatabase.getInstance().getReference();
+
+
         SignUpViewModel signUpViewModel = ViewModelProviders.of(getActivity()).get(SignUpViewModel.class);
         signUpViewModel.getUserMapMutableLiveData().observe(this, new Observer<HashMap<String, String>>() {
             @Override
@@ -110,6 +120,7 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
         btnFinishSignUp.setOnClickListener(this);
         signUpAddAvatar.setOnClickListener(this);
 
+
         return rootView;
     }
 
@@ -118,7 +129,7 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
         if (!TextUtils.isEmpty(userName) && userName.length() >= 5) {
             mUserMap.put("username", userName);
             signUpUser(mUserMap.get("email"), mUserMap.get("password"));
-            Snackbar.make(rootView,"Continue with no picture ?",Snackbar.LENGTH_SHORT)
+            Snackbar.make(rootView, "Continue with no picture ?", Snackbar.LENGTH_SHORT)
                     .show();
 
         } else {
@@ -135,7 +146,15 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String userId = task.getResult().getUser().getUid();
+                            Timber.i("createUserWithEmail:success".concat(userId));
+                            mUserMap.put("user_id", userId);
+                            mUserMap.put("avatar_url", "https://pixinvent.com/materialize-material-design-admin-template/app-assets/images/user/12.jpg");
                             Timber.i("createUserWithEmail:success".concat(task.getResult().getUser().getUid()));
+
+                            //save user here
+                            saveNewUser(mUserMap);
+
                             mSignUpProgress.setVisibility(View.GONE);
 
                             Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -146,6 +165,31 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
                         }
                     }
                 });
+    }
+
+    private void saveNewUser(HashMap<String, String> mUserMap) {
+
+        FirebaseUser firebaseUser = new FirebaseUser(
+                mUserMap.get("user_id"),
+                mUserMap.get("username"),
+                mUserMap.get("email"),
+                mUserMap.get("avatar_url"));
+        usersDatabaseRef.child("users").child(mUserMap.get("user_id")).setValue(firebaseUser)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getActivity(), "Suucessful", Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
     }
 
 
