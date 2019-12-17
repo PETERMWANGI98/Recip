@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.recip.R;
 import com.recip.models.Menu;
 import com.recip.models.Recipe;
@@ -61,6 +62,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
     private RecommendedAdapter recommendedAdapter;
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -83,6 +85,9 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
         homeFragmentViewModel.getListMutableLiveData().observe(this, recentListUpdateObserver);
         homeFragmentViewModel.getRandomRecipeLiveData().observe(this,randomListUpdateObserver);
         return root;
+    }
+
+    private void updateUserRelatedInfo() {
     }
 
     private Observer<ArrayList<Recipe>> randomListUpdateObserver=

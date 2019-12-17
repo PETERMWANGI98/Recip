@@ -83,15 +83,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private boolean validateLoginInfo(String email, String password) {
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Inputs cannot be empty ...", Toast.LENGTH_SHORT).show();
             return false;
-        }
-        else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             tVEmailLogin.setError("Invalid Email ...");
             return false;
-        }
-        else {
+        } else {
 
             return true;
         }
@@ -119,6 +117,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+        startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        }
     }
 }

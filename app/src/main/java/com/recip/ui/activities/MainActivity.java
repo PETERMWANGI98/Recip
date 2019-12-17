@@ -14,7 +14,14 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.recip.R;
+import com.recip.models.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -23,11 +30,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -37,11 +48,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavController navController;
     NavigationView navigationView;
     View headerView;
-    TextView userNameTextView;
 
+    TextView userNameTextView;
+    CircleImageView userImageView;
     String byPassName;
 
     FirebaseAuth mAuth;
+
+    FirebaseDatabase mUserDatabase;
+    DatabaseReference mUserDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +66,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpNavigation();
 
         mAuth = FirebaseAuth.getInstance();
+        mUserDatabase = FirebaseDatabase.getInstance();
 
         Menu menu = navigationView.getMenu();
         MenuItem menuItem = menu.findItem(R.id.nav_logout);
+        userNameTextView = (TextView) headerView.findViewById(R.id.userNameTextView);
+        userImageView = headerView.findViewById(R.id.userImageView);
 
         if (mAuth.getCurrentUser() == null) {
             menuItem.setTitle("Login");
 
             Intent intent = getIntent();
             byPassName = intent.getStringExtra("name");
-            userNameTextView = (TextView) headerView.findViewById(R.id.userNameTextView);
 
             if (byPassName != null) {
                 userNameTextView.setText(byPassName
@@ -70,10 +87,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         } else {
-            menuItem.setTitle("Logout");
-        }
+            mUserDatabaseReference = mUserDatabase.getReference().child("users").child(mAuth.getCurrentUser().getUid());
+            updateUserUI();
 
+        }
+        menuItem.setTitle("Logout");
     }
+
+    private void updateUserUI() {
+        mUserDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                FirebaseUser firebaseUser = dataSnapshot.getValue(FirebaseUser.class);
+                userNameTextView.setText(firebaseUser.getUserName());
+                Picasso.get()
+                        .load(firebaseUser.getUserAvatarUrl())
+                        .into(userImageView);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private void setUpNavigation() {
 
@@ -134,7 +172,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 Bundle bundle = new Bundle();
                 if (userNameTextView != null) {
-                    Timber.e("onNavigationItemSelected: ".concat(userNameTextView.getText().toString()));
                     bundle.putString("name", userNameTextView.getText().toString());
                 }
                 navController.navigate(R.id.nav_home, bundle);
@@ -169,6 +206,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
     }
 }
