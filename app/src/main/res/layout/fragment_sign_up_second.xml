@@ -45,18 +45,19 @@
             app:layout_constraintTop_toBottomOf="@+id/signUpUserAvatar" />
 
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/signUpUserAvatar"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:contentDescription="@string/nav_header_desc"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:tint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile"
-            tools:srcCompat="@drawable/profile" />
+            app:civ_border_width="2dp"
+            android:src="@android:color/white"
+            app:civ_border_color="@android:color/white"
+             />
 
         <ImageView
             android:id="@+id/signUpAddAvatar"
