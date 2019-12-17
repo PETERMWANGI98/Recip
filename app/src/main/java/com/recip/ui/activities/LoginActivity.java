@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.recip.R;
+import com.recip.ui.activities.signup.SignUpActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -113,5 +114,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
     }
 }

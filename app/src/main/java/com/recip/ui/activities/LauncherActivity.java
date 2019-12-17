@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.recip.R;
+import com.recip.ui.activities.signup.SignUpActivity;
 
 public class LauncherActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class LauncherActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(LauncherActivity.this,SignUpActivity.class));
+                startActivity(new Intent(LauncherActivity.this, SignUpActivity.class));
                 finish();
             }
         },1500);
