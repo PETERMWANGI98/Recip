@@ -2,6 +2,9 @@ package com.recip;
 
 import android.app.Application;
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 import com.recip.BuildConfig;
 
 import io.sentry.Sentry;
@@ -17,6 +20,8 @@ public class BaseApplication extends Application {
         }
         Sentry.init("https://bfbe326ed92945da91d6de9749e2af8c@sentry.io/1855991",
                 new AndroidSentryClientFactory(this));
+        AppCenter.start(this, "5e5f581e-ef97-46a8-9558-7b35b197449a",
+                Analytics.class, Crashes.class);
 
     }
 }
