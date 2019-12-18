@@ -2,6 +2,7 @@ package com.recip.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +30,9 @@ import timber.log.Timber;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.tVForgotPassword)
     TextView tVForgotPassword;
+
+    @BindView(R.id.constraintLogin)
+    ConstraintLayout constraintLogin;
 
     @BindView(R.id.tVEmailLogin)
     EditText tVEmailLogin;
@@ -84,10 +89,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private boolean validateLoginInfo(String email, String password) {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Inputs cannot be empty ...", Toast.LENGTH_SHORT).show();
+            Snackbar.make(constraintLogin, "Inputs cannot be empty ...", Snackbar.LENGTH_LONG)
+                    .show();
             return false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            tVEmailLogin.setError("Invalid Email ...");
+            Snackbar.make(constraintLogin, "Please enter a valid email ...", Snackbar.LENGTH_LONG)
+                    .show();
             return false;
         } else {
 
@@ -97,28 +104,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Timber.i("signInWithEmail:success");
-                            //save info to realm db and let user in
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Timber.i(task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_LONG).show();
-                        }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Timber.i("signInWithEmail:success");
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Timber.i(task.getException());
+                        Snackbar.make(constraintLogin, task.getException().getMessage(), Snackbar.LENGTH_LONG)
+                                .show();
                     }
                 });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-    }
 
     @Override
     protected void onStart() {

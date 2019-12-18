@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.button.MaterialButton;
 import com.recip.BuildConfig;
 import com.recip.R;
+import com.recip.ui.activities.LauncherActivity;
 import com.recip.ui.activities.LoginActivity;
 import com.recip.ui.activities.signup.SignUpViewModel;
 
@@ -67,7 +68,7 @@ public class SignUpOne extends Fragment implements View.OnClickListener {
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
-        startActivity(new Intent(getActivity(), LoginActivity.class));
+        startActivity(new Intent(getActivity(), LauncherActivity.class));
 
     }
 
