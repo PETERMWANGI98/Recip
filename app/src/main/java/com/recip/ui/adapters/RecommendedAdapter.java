@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.recip.R;
 import com.recip.models.Recipe;
 import com.recip.models.RecipeRandomResponse;
+import com.recip.ui.fragments.DetailsFragment;
 import com.recip.ui.viewholders.RecommendedViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -23,10 +25,12 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
 
     private Context mContext;
     private ArrayList<Recipe> recipeRandomResponses;
+    private FragmentManager fragmentManager;
 
-    public RecommendedAdapter(Context mContext, ArrayList<Recipe> recipeRandomResponses) {
+    public RecommendedAdapter(Context mContext, ArrayList<Recipe> recipeRandomResponses, FragmentManager fragmentManager) {
         this.mContext = mContext;
         this.recipeRandomResponses = recipeRandomResponses;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -44,15 +48,23 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
         Picasso.get()
                 .load(recipe.getImage())
                 .into(holder.recommendedImageView);
-        if (recipe.getDishTypes().size()!=0) {
+        if (recipe.getDishTypes().size() != 0) {
             holder.recommendedType.setText(recipe.getDishTypes().get(0).toUpperCase());
-        }
-        else {
+        } else {
             holder.recommendedType.setText("Uncategorized");
 
         }
         holder.recommendedDuration.setText(String.format("%d Minutes .", recipe.getCookingMinutes()));
         holder.recommendedTitle.setText(recipe.getTitle());
+
+        holder.recommendedImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.nav_host_fragment,new DetailsFragment())
+                        .commit();
+            }
+        });
     }
 
     @Override
