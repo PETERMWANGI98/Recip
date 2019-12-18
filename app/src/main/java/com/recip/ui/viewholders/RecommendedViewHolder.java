@@ -20,7 +20,7 @@ import com.recip.ui.fragments.DetailsFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecommendedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class RecommendedViewHolder extends RecyclerView.ViewHolder{
 
     private Context mContext;
 
@@ -36,20 +36,14 @@ public class RecommendedViewHolder extends RecyclerView.ViewHolder implements Vi
     @BindView(R.id.recommendedDuration)
     public TextView recommendedDuration;
 
+    @BindView(R.id.iVAddToFavourites)
+    public ImageView iVAddToFavourites;
+
     public RecommendedViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
 
     }
-
-    @Override
-    public void onClick(View v) {
-        int position = getLayoutPosition();
-        Snackbar.make(v, Integer.toString(position), Snackbar.LENGTH_LONG)
-                .show();
-    }
-
 
 }

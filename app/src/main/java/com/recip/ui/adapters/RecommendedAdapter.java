@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
 import com.recip.R;
 import com.recip.models.Recipe;
 import com.recip.models.RecipeRandomResponse;
@@ -45,6 +47,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
     @Override
     public void onBindViewHolder(@NonNull RecommendedViewHolder holder, int position) {
         Recipe recipe = recipeRandomResponses.get(position);
+        final boolean[] isAddedToFavourites = {false};
         Picasso.get()
                 .load(recipe.getImage())
                 .into(holder.recommendedImageView);
@@ -61,8 +64,36 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
             @Override
             public void onClick(View v) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment,new DetailsFragment())
+                        .replace(R.id.nav_host_fragment, new DetailsFragment())
                         .commit();
+            }
+        });
+
+        holder.iVAddToFavourites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isAddedToFavourites[0]) {
+                    holder.iVAddToFavourites.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    Snackbar snackbar = Snackbar.make(v, recipe.getTitle() + " Added to favourites", Snackbar.LENGTH_LONG);
+                    snackbar.setAction("UNDO", view -> {
+
+                    });
+                    snackbar.setActionTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+                    snackbar.show();
+
+                    isAddedToFavourites[0] = true;
+
+                } else {
+                    holder.iVAddToFavourites.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    Snackbar snackbar = Snackbar.make(v, recipe.getTitle() + " Removed from favourites", Snackbar.LENGTH_LONG);
+                    snackbar.setAction("UNDO", view -> {
+
+                    });
+                    snackbar.setActionTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+                    snackbar.show();
+                    isAddedToFavourites[0] = false;
+
+                }
             }
         });
     }
