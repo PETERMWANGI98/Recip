@@ -2,11 +2,14 @@ package com.recip.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,26 +26,11 @@ import com.recip.R;
 import com.recip.models.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.HashMap;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final String TAG = "MainActivity";
+
     private AppBarConfiguration mAppBarConfiguration;
     public DrawerLayout drawer;
     NavController navController;
@@ -54,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String byPassName;
 
     FirebaseAuth mAuth;
-
     FirebaseDatabase mUserDatabase;
     DatabaseReference mUserDatabaseReference;
 
