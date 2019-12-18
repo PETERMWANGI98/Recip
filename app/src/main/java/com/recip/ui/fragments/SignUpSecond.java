@@ -37,6 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.recip.Constants;
 import com.recip.R;
 import com.recip.models.FirebaseUser;
 import com.recip.ui.activities.LoginActivity;
@@ -58,13 +59,6 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class SignUpSecond extends Fragment implements View.OnClickListener {
-
-
-    private Unbinder unbinder;
-
-    @BindView(R.id.signUpAddAvatar)
-    ImageView signUpAddAvatar;
-
     @BindView(R.id.signUpUserAvatar)
     CircleImageView signUpUserAvatar;
 
@@ -80,16 +74,8 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
     @BindView(R.id.constraintUser)
     ConstraintLayout constraintLayout;
 
-    private View rootView;
     private HashMap<String, String> mUserMap;
 
-    private FirebaseAuth mAuth;
-    private DatabaseReference usersDatabaseRef;
-
-    private static final int GALLERY_REQUEST_CODE = 100;
-
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
 
     private Uri filePath;
 
@@ -101,22 +87,13 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mAuth = FirebaseAuth.getInstance();
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_sign_up_second, container, false);
-        unbinder = ButterKnife.bind(this, rootView);
-
-        usersDatabaseRef = FirebaseDatabase.getInstance().getReference();
-
+        View rootView = inflater.inflate(R.layout.fragment_sign_up_second, container, false);
+        ButterKnife.bind(this, rootView);
 
         SignUpViewModel signUpViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(SignUpViewModel.class);
         signUpViewModel.getUserMapMutableLiveData().observe(this, hashMap -> {
@@ -125,7 +102,7 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
         });
 
         btnFinishSignUp.setOnClickListener(this);
-        signUpAddAvatar.setOnClickListener(this);
+        signUpUserAvatar.setOnClickListener(this);
 
         return rootView;
     }
@@ -144,14 +121,14 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST_CODE);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), Constants.GALLERY_REQUEST_CODE);
 
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data.getData() != null) {
+        if (requestCode == Constants.GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data.getData() != null) {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
@@ -167,7 +144,7 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
 
     private void signUpUser(String email, String password) {
         mSignUpProgress.setVisibility(View.VISIBLE);
-        mAuth.createUserWithEmailAndPassword(email, password)
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         String userId = Objects.requireNonNull(Objects.requireNonNull(
@@ -190,7 +167,7 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
 
     private void saveNewUser(HashMap<String, String> mUserMap) {
         if (filePath != null) {
-            StorageReference ref = storageReference.child("users/" + UUID.randomUUID().toString());
+            StorageReference ref = FirebaseStorage.getInstance().getReference().child("users/" + UUID.randomUUID().toString());
             ref.putFile(filePath)
                     .addOnCompleteListener(task -> {
                         ref.getDownloadUrl().addOnCompleteListener(task1 -> {
@@ -203,7 +180,7 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
                                         mUserMap.get("username"),
                                         mUserMap.get("email"),
                                         mUserMap.get("avatar_url"));
-                                usersDatabaseRef.child("users").child(mUserMap.get("user_id")).setValue(firebaseUser)
+                                FirebaseDatabase.getInstance().getReference().child("users").child(mUserMap.get("user_id")).setValue(firebaseUser)
                                         .addOnCompleteListener(task2 -> {
                                             if (task.isSuccessful()) {
                                                 mSignUpProgress.setVisibility(View.GONE);
@@ -228,7 +205,6 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
     }
 
     @Override
@@ -236,7 +212,7 @@ public class SignUpSecond extends Fragment implements View.OnClickListener {
         if (v == btnFinishSignUp) {
             addUserExtras();
         }
-        if (v == signUpAddAvatar) {
+        if (v == signUpUserAvatar) {
             chooseImage();
         }
 
