@@ -10,12 +10,6 @@ public class Recipe extends RealmObject {
     private int readyInMinutes;
     private String dishType;
 
-    public Recipe(int id, String title, int readyInMinutes, String dishType) {
-        this.id = id;
-        this.title = title;
-        this.readyInMinutes = readyInMinutes;
-        this.dishType = dishType;
-    }
 
     public int getId() {
         return id;

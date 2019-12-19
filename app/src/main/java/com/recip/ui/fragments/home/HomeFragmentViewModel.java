@@ -13,6 +13,8 @@ import com.recip.network.RecipeApi;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +69,6 @@ public class HomeFragmentViewModel extends ViewModel {
             }
         });
     }
-
 
 
     private void populateList() {

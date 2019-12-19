@@ -1,8 +1,10 @@
 package com.recip.ui.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.recip.R;
+import com.recip.ui.fragments.MailDialogFragment;
 
 import java.util.Objects;
 
@@ -48,10 +51,9 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
 
         mAuth.sendPasswordResetEmail(emailAddress).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Snackbar.make(constraintForgotUser, "Password reset link sent to"
-                        .concat(emailAddress), Snackbar.LENGTH_LONG)
-                        .show();
-                startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                MailDialogFragment mailDialogFragment = new MailDialogFragment();
+                mailDialogFragment.show(fragmentManager, "Sample Fragment");
             } else {
                 Timber.e(task.getException());
                 Snackbar.make(constraintForgotUser, task.getException().getMessage()
