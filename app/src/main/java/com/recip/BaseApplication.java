@@ -6,6 +6,7 @@ import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 
+import io.realm.Realm;
 import io.sentry.Sentry;
 import io.sentry.android.AndroidSentryClientFactory;
 import timber.log.Timber;
@@ -21,7 +22,7 @@ public class BaseApplication extends Application {
                 new AndroidSentryClientFactory(this));
         AppCenter.start(this, "5e5f581e-ef97-46a8-9558-7b35b197449a",
                 Analytics.class, Crashes.class);
-
+        Realm.init(this);
 
     }
 }

@@ -1,5 +1,7 @@
 package com.recip.ui.fragments.home;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,11 +22,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.recip.R;
 import com.recip.models.Menu;
 import com.recip.models.Recipe;
 import com.recip.models.RecipeRandomResponse;
+import com.recip.ui.activities.WebViewActivity;
 import com.recip.ui.adapters.MenuAdapter;
 import com.recip.ui.adapters.RecommendedAdapter;
 
@@ -56,11 +60,13 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
     @BindView(R.id.tVUserWelcome)
     TextView tVUserWelcome;
 
+    @BindView(R.id.btnNewsWebView)
+    MaterialButton btnNewsWebView;
+
     private HomeFragmentViewModel homeFragmentViewModel;
     private MenuAdapter menuAdapter;
 
     private RecommendedAdapter recommendedAdapter;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -80,25 +86,26 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
         rvRecent.setOnClickListener(this);
         barsIcon.setOnClickListener(this);
         tVSearchhint.setOnClickListener(this);
+        btnNewsWebView.setOnClickListener(this);
 
         homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
         homeFragmentViewModel.getListMutableLiveData().observe(this, recentListUpdateObserver);
-        homeFragmentViewModel.getRandomRecipeLiveData().observe(this,randomListUpdateObserver);
+        homeFragmentViewModel.getRandomRecipeLiveData().observe(this, randomListUpdateObserver);
         return root;
     }
 
     private void updateUserRelatedInfo() {
     }
 
-    private Observer<ArrayList<Recipe>> randomListUpdateObserver=
-         new Observer<ArrayList<Recipe>>() {
-             @Override
-             public void onChanged(ArrayList<Recipe> recipes) {
-                 recommendedAdapter = new RecommendedAdapter(getContext(), recipes,getFragmentManager());
-                 recommendedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-                 recommendedRecyclerView.setAdapter(recommendedAdapter);
-             }
-         };
+    private Observer<ArrayList<Recipe>> randomListUpdateObserver =
+            new Observer<ArrayList<Recipe>>() {
+                @Override
+                public void onChanged(ArrayList<Recipe> recipes) {
+                    recommendedAdapter = new RecommendedAdapter(getContext(), recipes, getFragmentManager());
+                    recommendedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                    recommendedRecyclerView.setAdapter(recommendedAdapter);
+                }
+            };
 
     private Observer<? super ArrayList<Menu>> recentListUpdateObserver =
             new Observer<ArrayList<Menu>>() {
@@ -129,6 +136,8 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
             case R.id.tVSearchhint:
                 getActivity().onSearchRequested();
                 break;
+            case R.id.btnNewsWebView:
+                startActivity(new Intent(getActivity(), WebViewActivity.class));
         }
     }
 

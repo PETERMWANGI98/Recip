@@ -70,9 +70,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.tVtoLoginButton:
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
-            case R.id.btnSignUp:
-//                fetchData();
-                break;
         }
 
     }
