@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.activities.MoreRecipesActivity"
+        <activity android:name=".ui.activities.more.MoreRecipesActivity"
             android:parentActivityName=".ui.activities.MainActivity"
 
             ></activity>

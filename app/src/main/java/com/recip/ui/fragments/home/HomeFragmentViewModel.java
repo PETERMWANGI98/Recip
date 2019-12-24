@@ -1,7 +1,5 @@
 package com.recip.ui.fragments.home;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -13,8 +11,6 @@ import com.recip.network.RecipeApi;
 
 import java.util.ArrayList;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,8 +34,6 @@ public class HomeFragmentViewModel extends ViewModel {
         populateList();
         populateRecommended();
         listMutableLiveData.setValue(menuArrayList);
-
-
     }
 
     public MutableLiveData<ArrayList<Recipe>> getRandomRecipeLiveData() {

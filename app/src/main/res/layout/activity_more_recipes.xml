@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.MoreRecipesActivity">
+    tools:context=".ui.activities.more.MoreRecipesActivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mMoreRecyclerView"
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

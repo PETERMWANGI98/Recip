@@ -2,7 +2,6 @@ package com.recip.ui.viewholders;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.recip.R;
-import com.recip.ui.activities.MoreRecipesActivity;
+import com.recip.ui.activities.more.MoreRecipesActivity;
 
 
 import butterknife.BindView;

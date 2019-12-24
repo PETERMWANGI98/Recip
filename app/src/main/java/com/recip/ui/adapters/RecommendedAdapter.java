@@ -35,6 +35,10 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
         this.fragmentManager = fragmentManager;
     }
 
+    public RecommendedAdapter(ArrayList<Recipe> recipeRandomResponses) {
+        this.recipeRandomResponses = recipeRandomResponses;
+    }
+
     @NonNull
     @Override
     public RecommendedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
