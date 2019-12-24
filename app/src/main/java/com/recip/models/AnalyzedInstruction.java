@@ -12,10 +12,10 @@ public class AnalyzedInstruction {
 
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
     @SerializedName("steps")
     @Expose
-    private List<Step> steps = null;
+    public List<Step> steps = null;
 
     /**
      * No args constructor for use in serialization

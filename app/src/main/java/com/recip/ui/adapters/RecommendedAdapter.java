@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -41,9 +42,6 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
         this.fragmentManager = fragmentManager;
     }
 
-    public RecommendedAdapter(ArrayList<Recipe> recipeRandomResponses) {
-        this.recipeRandomResponses = recipeRandomResponses;
-    }
 
     @NonNull
     @Override
@@ -73,9 +71,16 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
         holder.recommendedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent=new Intent(mContext,RecipeDetailsActivity.class);
-                intent.putExtra("recipe", Parcels.wrap(recipe));
-                mContext.startActivity(intent);
+                Bundle args = new Bundle();
+                args.putParcelable("recipe", Parcels.wrap(recipe));
+                DetailsFragment detailsFragment=new DetailsFragment();
+                detailsFragment.setArguments(args);
+
+                //load fragment here
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment, detailsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

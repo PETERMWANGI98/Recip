@@ -4,10 +4,10 @@ import org.parceler.Parcel;
 
 @Parcel
 public class FirebaseUser {
-    private String userId;
-    private String userName;
-    private String userEmail;
-    private String userAvatarUrl;
+    public String userId;
+    public String userName;
+    public String userEmail;
+    public String userAvatarUrl;
 
 
     public FirebaseUser() {

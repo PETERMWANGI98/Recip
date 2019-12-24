@@ -11,13 +11,13 @@ public class Ingredient {
 
     @SerializedName("id")
     @Expose
-    private int id;
+    public int id;
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
     @SerializedName("image")
     @Expose
-    private String image;
+    public String image;
 
     /**
      * No args constructor for use in serialization

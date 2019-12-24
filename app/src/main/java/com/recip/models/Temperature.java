@@ -11,10 +11,10 @@ public class Temperature {
 
     @SerializedName("number")
     @Expose
-    private double number;
+    public double number;
     @SerializedName("unit")
     @Expose
-    private String unit;
+    public String unit;
 
     /**
      * No args constructor for use in serialization

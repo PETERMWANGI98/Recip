@@ -12,7 +12,7 @@ public class RecipeRandomResponse {
 
     @SerializedName("recipes")
     @Expose
-    private List<Recipe> recipes = null;
+    public List<Recipe> recipes = null;
 
     /**
      * No args constructor for use in serialization

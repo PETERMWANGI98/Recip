@@ -11,31 +11,31 @@ public class ProductMatch {
 
     @SerializedName("id")
     @Expose
-    private int id;
+    public int id;
     @SerializedName("title")
     @Expose
-    private String title;
+    public String title;
     @SerializedName("description")
     @Expose
-    private String description;
+    public String description;
     @SerializedName("price")
     @Expose
-    private String price;
+    public String price;
     @SerializedName("imageUrl")
     @Expose
-    private String imageUrl;
+    public String imageUrl;
     @SerializedName("averageRating")
     @Expose
-    private double averageRating;
+    public double averageRating;
     @SerializedName("ratingCount")
     @Expose
-    private double ratingCount;
+    public double ratingCount;
     @SerializedName("score")
     @Expose
-    private double score;
+    public double score;
     @SerializedName("link")
     @Expose
-    private String link;
+    public String link;
 
     /**
      * No args constructor for use in serialization

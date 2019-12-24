@@ -11,10 +11,10 @@ public class Measures {
 
     @SerializedName("us")
     @Expose
-    private Us us;
+    public Us us;
     @SerializedName("metric")
     @Expose
-    private Metric metric;
+    public Metric metric;
 
     /**
      * No args constructor for use in serialization
