@@ -8,7 +8,7 @@ import retrofit2.http.Query;
 
 public interface RecipeApi {
 
-    @GET("random?number=16&tags=vegetarian,dessert")
+    @GET("random?number=2&tags=vegetarian,dessert")
     Call<RecipeRandomResponse> getRecommendedRecipes();
 
     @GET("search?query=cheese&number=2")

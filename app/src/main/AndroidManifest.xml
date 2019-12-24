@@ -19,10 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.activities.more.MoreRecipesActivity"
+        <activity android:name=".ui.activities.RecipeDetailsActivity"
             android:parentActivityName=".ui.activities.MainActivity"
-
+            android:theme="@style/NoActionBar"
             ></activity>
+        <activity
+            android:name=".ui.activities.more.MoreRecipesActivity"
+            android:parentActivityName=".ui.activities.MainActivity" />
         <activity
             android:name=".ui.activities.WebViewActivity"
             android:parentActivityName=".ui.activities.MainActivity" />

@@ -2,6 +2,9 @@ package com.recip.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcel;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +20,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.recip.R;
 import com.recip.models.Recipe;
 import com.recip.models.RecipeRandomResponse;
+import com.recip.ui.activities.RecipeDetailsActivity;
 import com.recip.ui.fragments.DetailsFragment;
 import com.recip.ui.viewholders.RecommendedViewHolder;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -67,9 +73,9 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
         holder.recommendedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, new DetailsFragment())
-                        .commit();
+               Intent intent=new Intent(mContext,RecipeDetailsActivity.class);
+                intent.putExtra("recipe", Parcels.wrap(recipe));
+                mContext.startActivity(intent);
             }
         });
 

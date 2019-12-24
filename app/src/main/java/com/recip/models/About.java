@@ -1,11 +1,13 @@
 package com.recip.models;
 
+import org.parceler.Parcel;
+
 import java.util.Objects;
 
 public class About {
-    private int icon;
-    private String title;
-    private String description;
+    public int icon;
+    public String title;
+    public String description;
 
     public About(int icon, String title, String description) {
         this.icon = icon;

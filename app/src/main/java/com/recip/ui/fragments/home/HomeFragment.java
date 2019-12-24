@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
                     recommendedAdapter = new RecommendedAdapter(getContext(), recipes, getFragmentManager());
                     recommendedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     recommendedRecyclerView.setAdapter(recommendedAdapter);
-                    rvRecent.setNestedScrollingEnabled(false);
+                    recommendedRecyclerView.setNestedScrollingEnabled(false);
 
                 }
             };

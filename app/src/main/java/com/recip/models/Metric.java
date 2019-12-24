@@ -4,17 +4,20 @@ package com.recip.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Metric {
 
     @SerializedName("amount")
     @Expose
-    private double amount;
+    public double amount;
     @SerializedName("unitShort")
     @Expose
-    private String unitShort;
+    public String unitShort;
     @SerializedName("unitLong")
     @Expose
-    private String unitLong;
+    public String unitLong;
 
     /**
      * No args constructor for use in serialization

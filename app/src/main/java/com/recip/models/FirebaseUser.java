@@ -1,5 +1,8 @@
 package com.recip.models;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class FirebaseUser {
     private String userId;
     private String userName;

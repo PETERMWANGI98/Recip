@@ -5,47 +5,50 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class ExtendedIngredient {
 
     @SerializedName("id")
     @Expose
-    private int id;
+    public int id;
     @SerializedName("aisle")
     @Expose
-    private String aisle;
+    public String aisle;
     @SerializedName("image")
     @Expose
-    private String image;
+    public String image;
     @SerializedName("consitency")
     @Expose
-    private String consitency;
+    public String consitency;
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
     @SerializedName("original")
     @Expose
-    private String original;
+    public String original;
     @SerializedName("originalString")
     @Expose
-    private String originalString;
+    public String originalString;
     @SerializedName("originalName")
     @Expose
-    private String originalName;
+    public String originalName;
     @SerializedName("amount")
     @Expose
-    private double amount;
+    public double amount;
     @SerializedName("unit")
     @Expose
-    private String unit;
+    public String unit;
     @SerializedName("meta")
     @Expose
-    private List<String> meta = null;
+    public List<String> meta = null;
     @SerializedName("metaInformation")
     @Expose
-    private List<String> metaInformation = null;
+    public List<String> metaInformation = null;
     @SerializedName("measures")
     @Expose
-    private Measures measures;
+    public Measures measures;
 
     /**
      * No args constructor for use in serialization
