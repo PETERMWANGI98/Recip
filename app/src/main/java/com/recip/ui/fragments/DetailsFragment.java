@@ -27,6 +27,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import timber.log.Timber;
 
 public class DetailsFragment extends Fragment {
 
@@ -46,8 +47,8 @@ public class DetailsFragment extends Fragment {
     @BindView(R.id.tVRecipeDuration)
     TextView tVRecipeDuration;
 
-    @BindView(R.id.tVIngredients)
-    TextView tVIngredients;
+    @BindView(R.id.ingredientsTitle)
+    TextView ingredientsTitle;
 
 
     public static DetailsFragment newInstance() {
@@ -71,13 +72,11 @@ public class DetailsFragment extends Fragment {
                 .into(recipeImageView);
         tVRecipeTitle.setText(mRecipe.getTitle());
         tVRecipeDuration.setText(String.format(Locale.ENGLISH, "%d mins.", mRecipe.getCookingMinutes()));
-        String ingredients="";
-        for (int i = 0; i <mRecipe.getExtendedIngredients().size() ; i++) {
-            ingredients.concat(mRecipe.getExtendedIngredients().get(i).getAisle().concat("\n"));
-        }
-        tVIngredients.setText(ingredients);
-
-
+        int amount = (int)mRecipe.extendedIngredients.get(1).amount;
+        String unit = mRecipe.extendedIngredients.get(1).unit;
+        String name = mRecipe.extendedIngredients.get(1).name;
+        Timber.i(Integer.toString(mRecipe.extendedIngredients.size()));
+        ingredientsTitle.setText(String.format(Locale.ENGLISH,"%d %s %s",amount,unit,name ));
         return view;
     }
 
