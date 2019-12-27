@@ -21,6 +21,11 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     private Context mContext;
     private ArrayList<IngredientsList> stringArrayList;
 
+    public IngredientListAdapter(Context mContext, ArrayList<IngredientsList> stringArrayList) {
+        this.mContext = mContext;
+        this.stringArrayList = stringArrayList;
+    }
+
     @NonNull
     @Override
     public IngredientListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -142,7 +142,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:background="#c0c0c0"
-                        android:elevation="1dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tVRecipeDuration" />
@@ -175,8 +174,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tVIngredientsLabel" />
 
-                    <include
-                        android:id="@+id/include"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rVIngredients"
                         layout="@layout/ingredients_list_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -185,14 +184,29 @@
                         app:layout_constraintTop_toBottomOf="@+id/tVIngredientsLabel" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tVDirectionsLabel"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
                         android:text="Directions"
+                        android:textColor="#000000"
                         android:textStyle="bold"
-android:layout_marginTop="16dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/include" />
+                        app:layout_constraintTop_toBottomOf="@+id/rVIngredients" />
+
+                    <View
+                        android:id="@+id/greyDivider2"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="@+id/tVDirectionsLabel"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tVDirectionsLabel" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
