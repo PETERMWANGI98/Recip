@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.recip.R;
 import com.recip.models.IngredientsList;
 import com.recip.models.Recipe;
+import com.recip.ui.adapters.DirectionsAdapter;
 import com.recip.ui.adapters.IngredientListAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -55,14 +56,16 @@ public class DetailsFragment extends Fragment {
     @BindView(R.id.rVIngredients)
     RecyclerView rVIngredients;
 
+    @BindView(R.id.rVDirections)
+    RecyclerView rVDirections;
+
     private IngredientListAdapter ingredientListAdapter;
 
     ArrayList<IngredientsList> ingredientsLists = new ArrayList<>();
 
+    private DirectionsAdapter directionsAdapter;
+    ArrayList<String> stringArrayList = new ArrayList<>();
 
-    public static DetailsFragment newInstance() {
-        return new DetailsFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -84,18 +87,29 @@ public class DetailsFragment extends Fragment {
 
         ingredientListAdapter = new IngredientListAdapter(getActivity(), ingredientsLists);
         rVIngredients.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        ingredientsTitle.setText(String.format(Locale.ENGLISH,"%d %s %s",amount,unit,name ));
         rVIngredients.setAdapter(ingredientListAdapter);
-        updateRecipes();
+        updateIngredients();
+
+        directionsAdapter = new DirectionsAdapter(getActivity(), stringArrayList);
+        rVDirections.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rVDirections.setAdapter(directionsAdapter);
+        updateDirections();
         return view;
     }
 
-    private void updateRecipes() {
+    private void updateDirections() {
+        for (int i = 0; i < mRecipe.analyzedInstructions.get(0).steps.size(); i++) {
+            String string = mRecipe.analyzedInstructions.get(0).steps.get(i).step;
+            stringArrayList.add(string);
+        }
+    }
+
+    private void updateIngredients() {
         for (int i = 0; i < mRecipe.extendedIngredients.size(); i++) {
             int amount = (int) mRecipe.extendedIngredients.get(i).amount;
             String unit = mRecipe.extendedIngredients.get(i).unit;
             String name = mRecipe.extendedIngredients.get(i).name;
-            String ingredientsString = String.format(Locale.ENGLISH, "%d %s %s", amount, unit, name);
+            String ingredientsString = String.format(Locale.ENGLISH, "%d %s %s .", amount, unit, name);
 
             IngredientsList ingredientsList = new IngredientsList(ingredientsString);
             ingredientsLists.add(ingredientsList);
