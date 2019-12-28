@@ -2,6 +2,7 @@ package com.recip.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.recip.Constants;
 import com.recip.R;
 import com.recip.models.Recipe;
+import com.recip.ui.activities.MainActivity;
 import com.recip.ui.fragments.details.DetailsFragment;
 import com.recip.ui.viewholders.RecommendedViewHolder;
 import com.squareup.picasso.Picasso;
@@ -64,16 +67,12 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedViewHold
         holder.recommendedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle args = new Bundle();
-                args.putParcelable("recipe", Parcels.wrap(recipe));
-                DetailsFragment detailsFragment=new DetailsFragment();
-                detailsFragment.setArguments(args);
 
-                //load fragment here
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment, detailsFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                Intent intent = new Intent(mContext, MainActivity.class);
+                intent.putExtra("recipe", Parcels.wrap(recipe));
+                intent.setAction(Constants.MORE_TO_HOME_INTENT_IDENTIFIER);
+                mContext.startActivity(intent);
+
             }
         });
 

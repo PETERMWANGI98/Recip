@@ -6,10 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,9 +25,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.recip.Constants;
 import com.recip.R;
 import com.recip.models.FirebaseUser;
+import com.recip.models.Recipe;
+import com.recip.ui.fragments.details.DetailsFragment;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseAuth mAuth;
     FirebaseDatabase mUserDatabase;
     DatabaseReference mUserDatabaseReference;
+
+    Recipe mRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +89,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         menuItem.setTitle("Logout");
+
+        if (getIntent().getAction() != null && getIntent().getAction().equals(Constants.MORE_TO_HOME_INTENT_IDENTIFIER)) {
+            mRecipe = Parcels.unwrap(getIntent().getExtras().getParcelable("recipe"));
+//            navController.navigate(R.id.nav_details);
+            loadDetailsFragment(mRecipe);
+        }
+    }
+
+    private void loadDetailsFragment(Recipe recipe) {
+        FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
+        DetailsFragment mDetailsFragment = new DetailsFragment();
+        Bundle mBundle = new Bundle();
+        mBundle.putParcelable("recipe", Parcels.wrap(recipe));
+        mDetailsFragment.setArguments(mBundle);
+        mTransaction.add(R.id.nav_host_fragment, mDetailsFragment);
+        mTransaction.addToBackStack(null);
+        mTransaction.commit();
+
     }
 
     private void updateUserUI() {
@@ -106,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         headerView = navigationView.getHeaderView(0);
 
+        Bundle args = new Bundle();
+        args.putString("name", byPassName);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_favourites, R.id.nav_profile, R.id.nav_settings, R.id.nav_logout)
@@ -114,8 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        Bundle args = new Bundle();
-        args.putString("name", byPassName);
+
 
         navController.setGraph(R.navigation.mobile_navigation, args);
 
