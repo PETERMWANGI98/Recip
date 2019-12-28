@@ -26,6 +26,7 @@ import com.recip.models.Recipe;
 import com.recip.models.Summary;
 import com.recip.ui.adapters.DirectionsAdapter;
 import com.recip.ui.adapters.IngredientListAdapter;
+import com.recip.ui.adapters.RecipeTagsAdapter;
 import com.recip.ui.fragments.home.HomeFragment;
 import com.squareup.picasso.Picasso;
 
@@ -80,6 +81,18 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
 
     private DetailsViewModel mDetailsViewModel;
 
+    @BindView(R.id.rVTags)
+    RecyclerView rVTags;
+
+    @BindView(R.id.recipeSource)
+    TextView recipeSource;
+
+    @BindView(R.id.recipeLikes)
+    TextView recipeLikes;
+
+    private RecipeTagsAdapter mRecipeTagAdapter;
+    private ArrayList<String> mRecipeList = new ArrayList<>();
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -97,6 +110,8 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 .into(recipeImageView);
         tVRecipeTitle.setText(mRecipe.getTitle());
         tVRecipeDuration.setText(String.format(Locale.ENGLISH, "%d mins.", mRecipe.getCookingMinutes()));
+        recipeSource.setText(mRecipe.getSourceName());
+        recipeLikes.setText(String.format(Locale.ENGLISH, "%d likes", mRecipe.getAggregateLikes()));
 
 
         ingredientListAdapter = new IngredientListAdapter(getActivity(), ingredientsLists);
@@ -110,17 +125,28 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         updateDirections();
 
         mDetailsViewModel = ViewModelProviders.of(this).get(DetailsViewModel.class);
-        mDetailsViewModel.getmSummaryMutableLiveData().observe(this,summaryUpdateObserver);
+        mDetailsViewModel.getmSummaryMutableLiveData().observe(this, summaryUpdateObserver);
+
+
+        //handle the tags recyclerview
+        mRecipeTagAdapter = new RecipeTagsAdapter(getActivity(), mRecipeList);
+        rVTags.setAdapter(mRecipeTagAdapter);
+        rVTags.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        updateTags();
 
         imageViewBack.setOnClickListener(this);
 
         return view;
     }
 
+    private void updateTags() {
+        mRecipeList.addAll(mRecipe.getDishTypes());
+    }
+
     private Observer<Summary> summaryUpdateObserver =
             summary -> {
                 Timber.i(summary.getSummary());
-                String summaryText=summary.getSummary();
+                String summaryText = summary.getSummary();
                 recipeSummary.setText(summaryText);
             };
 

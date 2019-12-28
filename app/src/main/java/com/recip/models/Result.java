@@ -9,18 +9,24 @@ public class Result {
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("calories")
+    @Expose
+    private Integer calories;
+    @SerializedName("carbs")
+    @Expose
+    private String carbs;
+    @SerializedName("fat")
+    @Expose
+    private String fat;
     @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("imageUrls")
+    @SerializedName("imageType")
     @Expose
-    private List<String> imageUrls = null;
-    @SerializedName("readyInMinutes")
+    private String imageType;
+    @SerializedName("protein")
     @Expose
-    private Integer readyInMinutes;
-    @SerializedName("servings")
-    @Expose
-    private Integer servings;
+    private String protein;
     @SerializedName("title")
     @Expose
     private String title;
@@ -34,20 +40,24 @@ public class Result {
 
     /**
      *
-     * @param readyInMinutes
      * @param image
-     * @param servings
-     * @param imageUrls
+     * @param carbs
+     * @param protein
+     * @param fat
      * @param id
+     * @param calories
      * @param title
+     * @param imageType
      */
-    public Result(Integer id, String image, List<String> imageUrls, Integer readyInMinutes, Integer servings, String title) {
+    public Result(Integer id, Integer calories, String carbs, String fat, String image, String imageType, String protein, String title) {
         super();
         this.id = id;
+        this.calories = calories;
+        this.carbs = carbs;
+        this.fat = fat;
         this.image = image;
-        this.imageUrls = imageUrls;
-        this.readyInMinutes = readyInMinutes;
-        this.servings = servings;
+        this.imageType = imageType;
+        this.protein = protein;
         this.title = title;
     }
 
@@ -59,6 +69,30 @@ public class Result {
         this.id = id;
     }
 
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
+    }
+
+    public String getCarbs() {
+        return carbs;
+    }
+
+    public void setCarbs(String carbs) {
+        this.carbs = carbs;
+    }
+
+    public String getFat() {
+        return fat;
+    }
+
+    public void setFat(String fat) {
+        this.fat = fat;
+    }
+
     public String getImage() {
         return image;
     }
@@ -67,28 +101,20 @@ public class Result {
         this.image = image;
     }
 
-    public List<String> getImageUrls() {
-        return imageUrls;
+    public String getImageType() {
+        return imageType;
     }
 
-    public void setImageUrls(List<String> imageUrls) {
-        this.imageUrls = imageUrls;
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 
-    public Integer getReadyInMinutes() {
-        return readyInMinutes;
+    public String getProtein() {
+        return protein;
     }
 
-    public void setReadyInMinutes(Integer readyInMinutes) {
-        this.readyInMinutes = readyInMinutes;
-    }
-
-    public Integer getServings() {
-        return servings;
-    }
-
-    public void setServings(Integer servings) {
-        this.servings = servings;
+    public void setProtein(String protein) {
+        this.protein = protein;
     }
 
     public String getTitle() {

@@ -30,6 +30,7 @@ import com.recip.models.Recipe;
 import com.recip.models.RecipeRandomResponse;
 import com.recip.ui.activities.WebViewActivity;
 import com.recip.ui.adapters.MenuAdapter;
+import com.recip.ui.adapters.RecipeTagsAdapter;
 import com.recip.ui.adapters.RecommendedAdapter;
 
 import java.util.ArrayList;
@@ -63,18 +64,13 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
     @BindView(R.id.btnNewsWebView)
     MaterialButton btnNewsWebView;
 
-    private HomeFragmentViewModel homeFragmentViewModel;
-    private MenuAdapter menuAdapter;
-
-    private RecommendedAdapter recommendedAdapter;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        if (getArguments() != null & getArguments().getString("name")!=null) {
+        if (getArguments() != null & getArguments().getString("name") != null) {
             tVUserWelcome.setText(getString(R.string.find_label).concat(getArguments().getString("name").concat("?")));
 
         } else {
@@ -88,9 +84,10 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
         tVSearchhint.setOnClickListener(this);
         btnNewsWebView.setOnClickListener(this);
 
-        homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
+        HomeFragmentViewModel homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
         homeFragmentViewModel.getListMutableLiveData().observe(this, recentListUpdateObserver);
         homeFragmentViewModel.getRandomRecipeLiveData().observe(this, randomListUpdateObserver);
+
         return root;
     }
 
@@ -99,7 +96,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
             new Observer<ArrayList<Recipe>>() {
                 @Override
                 public void onChanged(ArrayList<Recipe> recipes) {
-                    recommendedAdapter = new RecommendedAdapter(getContext(), recipes, getFragmentManager());
+                    RecommendedAdapter recommendedAdapter = new RecommendedAdapter(getContext(), recipes, getFragmentManager());
                     recommendedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     recommendedRecyclerView.setAdapter(recommendedAdapter);
                     recommendedRecyclerView.setNestedScrollingEnabled(false);
@@ -111,7 +108,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
             new Observer<ArrayList<Menu>>() {
                 @Override
                 public void onChanged(ArrayList<Menu> menus) {
-                    menuAdapter = new MenuAdapter(getContext(), menus);
+                    MenuAdapter menuAdapter = new MenuAdapter(getContext(), menus);
                     rvRecent.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                     rvRecent.setAdapter(menuAdapter);
 

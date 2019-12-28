@@ -1,6 +1,7 @@
 package com.recip.network;
 
 import com.recip.models.RecipeRandomResponse;
+import com.recip.models.SearchResponse;
 import com.recip.models.Summary;
 
 import retrofit2.Call;
@@ -10,14 +11,23 @@ import retrofit2.http.Query;
 
 public interface RecipeApi {
 
-    @GET("random?number=2&tags=vegetarian,dessert")
-    Call<RecipeRandomResponse> getRecommendedRecipes();
-
-    @GET("search?query=cheese&number=2")
-    Call<RecipeRandomResponse> getRecipeFromTitle(
-
+    @GET("random")
+    Call<RecipeRandomResponse> getMoreRecipes(
+            @Query("number") int number,
+            @Query("tags") String tags
     );
 
+//    @GET("search")
+//    Call<SearchResponse> getRecipeFromTitle(
+//            @Query("query") String queryString,
+//            @Query("number") int number
+//    );
+
+    @GET("random")
+    Call<RecipeRandomResponse> getRecommendedRecipes(
+            @Query("number") int number
+
+    );
     @GET("{id}/summary")
     Call<Summary> getRecipeSummary(
             @Path("id") Integer recipeId

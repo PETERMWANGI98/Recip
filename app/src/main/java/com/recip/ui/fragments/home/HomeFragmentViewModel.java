@@ -42,7 +42,7 @@ public class HomeFragmentViewModel extends ViewModel {
 
     private void populateRecommended() {
         RecipeApi recipClient = RecipClient.getClient();
-        Call<RecipeRandomResponse> randomRecipeCall = recipClient.getRecommendedRecipes();
+        Call<RecipeRandomResponse> randomRecipeCall = recipClient.getRecommendedRecipes(4);
         randomRecipeCall.enqueue(new Callback<RecipeRandomResponse>() {
             @Override
             public void onResponse(Call<RecipeRandomResponse> call, Response<RecipeRandomResponse> response) {
@@ -67,7 +67,7 @@ public class HomeFragmentViewModel extends ViewModel {
 
     private void populateList() {
         Menu menuOne = new Menu("https://ak9.picdn.net/shutterstock/videos/720259/thumb/1.jpg", "Salad");
-        Menu menuTwo = new Menu("https://wallpaperaccess.com/full/138469.jpg", "Dinner");
+        Menu menuTwo = new Menu("https://wallpaperaccess.com/full/138469.jpg", "Lunch");
         Menu menuThree = new Menu("https://hdwallpaperim.com/wp-content/uploads/2017/08/27/144689-chocolate-cakes-desserts-748x468.jpg", "Desserts");
         Menu menuFour = new Menu("https://freedesignfile.com/upload/2017/07/sumptuous-breakfast-HD-picture.jpg", "Breakfast");
         Menu menuFive = new Menu("https://abigailkirsch.com/wp-content/uploads/2015/02/hd-crab-and-grapefuit-glam.jpg", "Appetizer");

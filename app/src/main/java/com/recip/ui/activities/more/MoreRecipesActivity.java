@@ -8,48 +8,89 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.recip.R;
 import com.recip.models.Recipe;
+import com.recip.models.RecipeRandomResponse;
+import com.recip.network.RecipClient;
+import com.recip.network.RecipeApi;
 import com.recip.ui.adapters.RecommendedAdapter;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import timber.log.Timber;
 
 public class MoreRecipesActivity extends AppCompatActivity {
 
-    MoreRecipesViewModel moreRecipesViewModel;
-   RecommendedAdapter mRecommendedAdapter;
+    RecommendedAdapter mRecommendedAdapter;
 
-   @BindView(R.id.mMoreRecyclerView)
-   RecyclerView mMoreRecyclerView;
+    @BindView(R.id.mMoreRecyclerView)
+    RecyclerView mMoreRecyclerView;
+
+    String title;
+
+    ArrayList<Recipe> recipeArrayList = new ArrayList<>();
+
+    @BindView(R.id.mProgressBar)
+    ProgressBar mProgressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_recipes);
         ButterKnife.bind(this);
 
-        moreRecipesViewModel= ViewModelProviders.of(this)
-                .get(MoreRecipesViewModel.class);
-        moreRecipesViewModel.getRecipeMutableLiveData().observe(this,moreRecipesObserver);
-
         if (getIntent() != null) {
-            String title = getIntent().getStringExtra("title");
+            title = getIntent().getStringExtra("title");
             getSupportActionBar().setTitle(title);
+            Timber.i(title);
+
+        } else {
+            title = "African";
         }
+        populateRecipes();
 
     }
 
-    private Observer<ArrayList<Recipe>> moreRecipesObserver=
-            new Observer<ArrayList<Recipe>>() {
-                @Override
-                public void onChanged(ArrayList<Recipe> recipes) {
-                    Context mContext=MoreRecipesActivity.this;
-                    mRecommendedAdapter = new RecommendedAdapter(mContext, recipes, getSupportFragmentManager());
+    private void populateRecipes() {
+        mProgressBar.setVisibility(View.VISIBLE);
+        RecipeApi recipClient = RecipClient.getClient();
+        String recipeTitle = title.toLowerCase();
+
+        Timber.i(recipeTitle);
+        Call<RecipeRandomResponse> randomRecipeCall = recipClient.getMoreRecipes(10, recipeTitle);
+        randomRecipeCall.enqueue(new Callback<RecipeRandomResponse>() {
+            @Override
+            public void onResponse(Call<RecipeRandomResponse> call, Response<RecipeRandomResponse> response) {
+                if (response.isSuccessful()) {
+                    Timber.i("Successfull %d", response.code());
+                    assert response.body() != null;
+                    recipeArrayList.addAll(response.body().getRecipes());
+                    Timber.i(Integer.toString(recipeArrayList.size()));
+
+                    Context mContext = MoreRecipesActivity.this;
+                    mRecommendedAdapter = new RecommendedAdapter(mContext, recipeArrayList, getSupportFragmentManager());
                     mMoreRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
                     mMoreRecyclerView.setAdapter(mRecommendedAdapter);
+
+                    mProgressBar.setVisibility(View.GONE);
                 }
-            };
+            }
+
+            @Override
+            public void onFailure(Call<RecipeRandomResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 }
