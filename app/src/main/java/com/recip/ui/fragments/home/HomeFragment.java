@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.recip.R;
@@ -64,6 +65,9 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
     @BindView(R.id.btnNewsWebView)
     MaterialButton btnNewsWebView;
 
+    @BindView(R.id.shimmer_container)
+    ShimmerFrameLayout mShimmerFrameLayout;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -100,6 +104,8 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
                     recommendedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     recommendedRecyclerView.setAdapter(recommendedAdapter);
                     recommendedRecyclerView.setNestedScrollingEnabled(false);
+                    mShimmerFrameLayout.stopShimmerAnimation();
+                    mShimmerFrameLayout.setVisibility(View.INVISIBLE);
 
                 }
             };
@@ -138,5 +144,15 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerFrameLayout.startShimmerAnimation();
+    }
 
+    @Override
+    public void onPause() {
+        mShimmerFrameLayout.stopShimmerAnimation();
+        super.onPause();
+    }
 }

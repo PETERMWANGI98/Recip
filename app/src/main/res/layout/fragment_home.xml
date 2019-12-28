@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:theme="@style/Theme.MaterialComponents"
     android:scrollbars="none"
-    android:layout_height="match_parent">
+    android:theme="@style/Theme.MaterialComponents">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@android:color/white"
         android:layout_height="wrap_content"
-        >
+        android:background="@android:color/white">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,112 +85,152 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-        android:id="@+id/tVUserWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:textSize="20sp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSearch" />
+            android:id="@+id/tVUserWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSearch" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRecent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tVUserWelcome" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVUserWelcome" />
 
-    <include
-        android:id="@+id/homeNewsInclude"
-        layout="@layout/home_news_banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvRecent" />
-
-    <TextView
-        android:id="@+id/tvRecommendedTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recommended Recipes"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_margin="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeNewsInclude" />
-    <TextView
-        android:id="@+id/textViewRecommendedLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="Recipes you might like"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRecommendedTitle" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recommendedRecyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRecommendedLabel"
-        android:layout_margin="16dp"
-        android:paddingBottom="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnRecommendations"
+        <include
+            android:id="@+id/homeNewsInclude"
+            layout="@layout/home_news_banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:padding="16dp"
-            android:onClick="onClick"
-            android:elevation="0dp"
-            android:text="Show all recommendations"
-            android:letterSpacing="0.01"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvRecent" />
+
+        <TextView
+            android:id="@+id/tvRecommendedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Recommended Recipes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeNewsInclude" />
+
+        <TextView
+            android:id="@+id/textViewRecommendedLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Recipes you might like"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@android:color/black"
-            android:background="@android:color/white"
-            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecommendedTitle" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recommendedRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRecommendedLabel" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_margin="16dp"
+            android:orientation="horizontal"
+            app:duration="800"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRecommendedLabel">
+
+            <!-- Adding 3 rows of placeholders -->
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+
+                android:orientation="horizontal">
+
+                <include layout="@layout/recipe_placeholder_item" />
+
+                <include layout="@layout/recipe_placeholder_item" />
+
+                <include layout="@layout/recipe_placeholder_item" />
+
+                <include layout="@layout/recipe_placeholder_item" />
+
+                <include layout="@layout/recipe_placeholder_item" />
+
+                <include layout="@layout/recipe_placeholder_item" />
+
+            </GridLayout>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecommendations"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:strokeColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:letterSpacing="0.01"
+            android:onClick="onClick"
+            android:padding="8dp"
+            android:text="Show all recommendations"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
             android:textStyle="normal"
             app:cornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recommendedRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/shimmer_container"
+            app:strokeColor="@android:color/black" />
 
         <TextView
             android:id="@+id/tvAfricanTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
             android:text="Explore African Recipes"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="32dp"
-            android:layout_margin="16dp"
-            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnRecommendations" />
 

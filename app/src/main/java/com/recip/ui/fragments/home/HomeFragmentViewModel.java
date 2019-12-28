@@ -42,7 +42,7 @@ public class HomeFragmentViewModel extends ViewModel {
 
     private void populateRecommended() {
         RecipeApi recipClient = RecipClient.getClient();
-        Call<RecipeRandomResponse> randomRecipeCall = recipClient.getRecommendedRecipes(4);
+        Call<RecipeRandomResponse> randomRecipeCall = recipClient.getRecommendedRecipes(6);
         randomRecipeCall.enqueue(new Callback<RecipeRandomResponse>() {
             @Override
             public void onResponse(Call<RecipeRandomResponse> call, Response<RecipeRandomResponse> response) {

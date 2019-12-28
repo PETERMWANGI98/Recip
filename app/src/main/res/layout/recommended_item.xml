@@ -53,14 +53,14 @@
 
         <TextView
             android:id="@+id/recommendedTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:text="@string/baked_cheese_manicotti"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:maxLines="1"
             app:layout_constraintEnd_toEndOf="@+id/recommendedType"
-            app:layout_constraintStart_toStartOf="@+id/recommendedType"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recommendedType" />
 
         <TextView
