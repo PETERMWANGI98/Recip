@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment implements LifecycleOwner, View.OnCli
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        if (getArguments().getString("name") != null) {
+        if (getArguments() != null & getArguments().getString("name")!=null) {
             tVUserWelcome.setText(getString(R.string.find_label).concat(getArguments().getString("name").concat("?")));
 
         } else {

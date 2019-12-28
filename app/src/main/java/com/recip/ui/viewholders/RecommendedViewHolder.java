@@ -1,21 +1,14 @@
 package com.recip.ui.viewholders;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.recip.R;
-import com.recip.ui.activities.MainActivity;
-import com.recip.ui.fragments.DetailsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

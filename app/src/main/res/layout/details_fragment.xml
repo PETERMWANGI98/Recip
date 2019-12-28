@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:theme="@style/NoActionBar"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.DetailsFragment">
+    tools:context=".ui.fragments.details.DetailsFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -43,12 +44,22 @@
                     android:layout_height="?attr/actionBarSize"
                     android:layout_marginTop="32dp"
                     app:layout_collapseMode="pin"
-                    app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageViewBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="0dp"
+                            android:src="@drawable/ic_arrow_back_black_24dp"
+                            android:tint="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/imageView"
@@ -146,6 +157,21 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tVRecipeDuration" />
 
+
+                    <TextView
+                        android:id="@+id/recipeSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="1/2 cup plain floor"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/greyDivider" />
+
                     <TextView
                         android:id="@+id/tVIngredientsLabel"
                         android:layout_width="wrap_content"
@@ -153,13 +179,12 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:maxLines="3"
-                        android:paddingTop="16dp"
                         android:text="Ingredients"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/greyDivider" />
+                        app:layout_constraintTop_toBottomOf="@+id/recipeSummary" />
 
                     <View
                         android:id="@+id/greyDivider1"
@@ -183,6 +208,18 @@
                         app:layout_constraintStart_toStartOf="@+id/greyDivider1"
                         app:layout_constraintTop_toBottomOf="@+id/tVIngredientsLabel" />
 
+                    <View
+                        android:id="@+id/greyDivider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="#c0c0c0"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rVIngredients" />
+
                     <TextView
                         android:id="@+id/tVDirectionsLabel"
                         android:layout_width="wrap_content"
@@ -193,7 +230,7 @@
                         android:textColor="#000000"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rVIngredients" />
+                        app:layout_constraintTop_toBottomOf="@+id/greyDivider3" />
 
                     <View
                         android:id="@+id/greyDivider2"

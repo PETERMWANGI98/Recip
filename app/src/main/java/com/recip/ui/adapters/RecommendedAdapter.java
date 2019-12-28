@@ -2,27 +2,20 @@ package com.recip.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.recip.R;
 import com.recip.models.Recipe;
-import com.recip.models.RecipeRandomResponse;
-import com.recip.ui.activities.RecipeDetailsActivity;
-import com.recip.ui.fragments.DetailsFragment;
+import com.recip.ui.fragments.details.DetailsFragment;
 import com.recip.ui.viewholders.RecommendedViewHolder;
 import com.squareup.picasso.Picasso;
 
