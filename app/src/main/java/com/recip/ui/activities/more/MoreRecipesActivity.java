@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.recip.R;
 import com.recip.models.Recipe;
 import com.recip.models.RecipeRandomResponse;
@@ -34,12 +35,13 @@ public class MoreRecipesActivity extends AppCompatActivity {
     @BindView(R.id.mMoreRecyclerView)
     RecyclerView mMoreRecyclerView;
 
+    @BindView(R.id.shimmer_view_container)
+    ShimmerFrameLayout mShimmerViewContainer;
+
     String title;
 
     ArrayList<Recipe> recipeArrayList = new ArrayList<>();
 
-    @BindView(R.id.mProgressBar)
-    ProgressBar mProgressBar;
 
 
     @Override
@@ -61,7 +63,6 @@ public class MoreRecipesActivity extends AppCompatActivity {
     }
 
     private void populateRecipes() {
-        mProgressBar.setVisibility(View.VISIBLE);
         RecipeApi recipClient = RecipClient.getClient();
         String recipeTitle = title.toLowerCase();
 
@@ -80,8 +81,9 @@ public class MoreRecipesActivity extends AppCompatActivity {
                     mRecommendedAdapter = new RecommendedAdapter(mContext, recipeArrayList, getSupportFragmentManager());
                     mMoreRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
                     mMoreRecyclerView.setAdapter(mRecommendedAdapter);
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
 
-                    mProgressBar.setVisibility(View.GONE);
                 }
             }
 
@@ -93,4 +95,15 @@ public class MoreRecipesActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+    }
 }

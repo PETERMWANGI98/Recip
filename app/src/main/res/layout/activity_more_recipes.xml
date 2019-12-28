@@ -3,19 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".ui.activities.more.MoreRecipesActivity">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mMoreRecyclerView"
         android:layout_width="match_parent"
-        android:background="@android:color/white"
-        android:layout_height="match_parent"/>
-    <ProgressBar
-        android:id="@+id/mProgressBar"
+        android:layout_height="match_parent"
+        android:background="@android:color/white" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_centerInParent="true" />
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        app:duration="800">
+
+        <!-- Adding 3 rows of placeholders -->
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal">
+
+            <include layout="@layout/recipe_placeholder_item" />
+
+            <include layout="@layout/recipe_placeholder_item" />
+
+            <include layout="@layout/recipe_placeholder_item" />
+
+            <include layout="@layout/recipe_placeholder_item" />
+
+            <include layout="@layout/recipe_placeholder_item" />
+
+            <include layout="@layout/recipe_placeholder_item" />
+
+        </GridLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 </RelativeLayout>
