@@ -44,8 +44,9 @@
     <string name="menu_details">Details</string>
 
 
+    <string name="search_hint">Search cheese</string>
+    <string name="search_label">Search</string>
 
-    <string name="search_hint">Search recipe …</string>
 
     <string name="about_us_text">Your Application reflects an identity of your business and its time to mark your identity! Discover Solutions
         is by your side in your journey towards becoming a proud business owner. Now a days there are plenty of brands available in same categories, Discover helps you to be unique from the others \n\n

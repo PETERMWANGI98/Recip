@@ -22,7 +22,8 @@
         <activity android:name=".ui.activities.RecipeDetailsActivity"
             android:parentActivityName=".ui.activities.MainActivity"
             android:theme="@style/NoActionBar"
-            ></activity>
+            >
+        </activity>
         <activity
             android:name=".ui.activities.more.MoreRecipesActivity"
             android:parentActivityName=".ui.activities.MainActivity" />
@@ -41,7 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.SearchActivity">
+        <activity android:name=".ui.activities.SearchActivity"
+            android:label="@string/search_label"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

@@ -1,8 +1,11 @@
 package com.recip.network;
 
+import com.recip.models.Recipe;
 import com.recip.models.RecipeRandomResponse;
 import com.recip.models.SearchResponse;
 import com.recip.models.Summary;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -17,20 +20,26 @@ public interface RecipeApi {
             @Query("tags") String tags
     );
 
-//    @GET("search")
-//    Call<SearchResponse> getRecipeFromTitle(
-//            @Query("query") String queryString,
-//            @Query("number") int number
-//    );
-
     @GET("random")
     Call<RecipeRandomResponse> getRecommendedRecipes(
             @Query("number") int number
 
     );
+
     @GET("{id}/summary")
     Call<Summary> getRecipeSummary(
             @Path("id") Integer recipeId
+    );
+
+    @GET("complexSearch")
+    Call<SearchResponse> getRecipeFromSearch(
+            @Query("query") String queryString,
+            @Query("number") int resultsCount
+    );
+
+    @GET("informationBulk")
+    Call<List<Recipe>> getRecipeInformation(
+            @Query("ids") String idsToSearch
     );
 
 }
