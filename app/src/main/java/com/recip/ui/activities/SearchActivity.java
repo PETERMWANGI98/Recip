@@ -2,7 +2,9 @@ package com.recip.ui.activities;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SearchRecentSuggestionsProvider;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -16,6 +18,7 @@ import com.recip.models.Recipe;
 import com.recip.models.SearchResponse;
 import com.recip.network.RecipClient;
 import com.recip.network.RecipeApi;
+import com.recip.providers.RecipeSuggestionProvider;
 import com.recip.ui.adapters.RecommendedAdapter;
 
 import java.util.ArrayList;
@@ -48,8 +51,12 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
+            SearchRecentSuggestions suggestions =
+                    new SearchRecentSuggestions(this,
+                            RecipeSuggestionProvider.AUTHORITY,
+                            RecipeSuggestionProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
             getRecipeFromQuery(query);
-
         }
     }
 
